@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Analysis with Python</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .description {
+            width: 50%;
+        }
+        .code {
+            width: 30%;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Data Analysis with Python</h1>
+<h2>1. Cheat Sheet: Importing Data Sets</h2>
+
+<table>
+  <tr>
+    <th>Package/Method</th>
+    <th class="description">Description</th>
+    <th class="code">Code Example</th>
+  </tr>
+  <tr>
+    <td>Read CSV data set</td>
+    <td class="description">Read the CSV file containing a data set to a pandas data frame</td>
+    <td class="code">
+      <pre><code>df = pd.read_csv("CSV_path", header = None) 
+# load without header 
+df = pd.read_csv("CSV_path", header = 0) 
+# load using first row as header</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">Note: The labs in this course run in JupyterLite environment. In JupyterLite environment, you'll need to download the required file to the local environment and then use the local path to the file as the CSV_path. However, in case you are using JupyterLabs, or any other Python compiler on your local machine, you can use the URL of the required file directly as the CSV_path.</td>
+  </tr>
+  <tr>
+    <td>Print first few entries</td>
+    <td class="description">Print the first few entries (default 5) of the pandas data frame</td>
+    <td class="code">
+      <pre><code>df.head(n) #n=number of entries; default 5</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Print last few entries</td>
+    <td class="description">Print the last few entries (default 5) of the pandas data frame</td>
+    <td class="code">
+      <pre><code>df.tail(n) #n=number of entries; default 5</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Assign header names</td>
+    <td class="description">Assign appropriate header names to the data frame</td>
+    <td class="code">
+      <pre><code>headers = ["x", "y", "z", ....]
+df.columns = headers</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Replace "?" with NaN</td>
+    <td class="description">Replace the entries "?" with NaN entry from Numpy library</td>
+    <td class="code">
+      <pre><code>df.replace('?', np.nan)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Retrieve data types</td>
+    <td class="description">Retrieve the data types of the data frame columns</td>
+    <td class="code">
+      <pre><code>df.dtypes</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Retrieve statistical description</td>
+    <td class="description">Retrieve the statistical description of the data set. Defaults use is for only numerical data types. Use include="all" to create summary for all variables</td>
+    <td class="code">
+      <pre><code>df.describe() #default use df.describe(include="all")</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Retrieve data set summary</td>
+    <td class="description">Retrieve the summary of the data set being used, from the data frame</td>
+    <td class="code">
+      <pre><code>df.info()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Save data frame to CSV</td>
+    <td class="description">Save the processed data frame to a CSV file with a specified path</td>
+    <td class="code">
+      <pre><code>df.to_csv("output CSV path")</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+
+
+<body>
+
+<h2>2. Cheat Sheet: Data Wrangling</h2>
+
+<table>
+  <tr>
+    <th>Package/Method</th>
+    <th class="description">Description</th>
+    <th class="code">Code Example</th>
+  </tr>
+  <tr>
+    <td>Replace missing data with frequency</td>
+    <td class="description">Replace the missing values of the data set attribute with the most common occurring entry in the column.</td>
+    <td class="code">
+      <pre><code>MostFrequentEntry = df['attribute_name'].value_counts().idxmax() 
+df['attribute_name'].replace(np.nan, MostFrequentEntry, inplace=True)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Replace missing data with mean</td>
+    <td class="description">Replace the missing values of the data set attribute with the mean of all the entries in the column.</td>
+    <td class="code">
+      <pre><code>AverageValue = df['attribute_name'].astype(<data_type>).mean(axis=0)
+df['attribute_name'].replace(np.nan, AverageValue, inplace=True)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Fix the data types</td>
+    <td class="description">Fix the data types of the columns in the dataframe.</td>
+    <td class="code">
+      <pre><code>df[['attribute1_name', 'attribute2_name', ...]] = 
+df[['attribute1_name', 'attribute2_name', ...]].astype('data_type')
+# data_type is int, float, char, etc.</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Data Normalization</td>
+    <td class="description">Normalize the data in a column such that the values are restricted between 0 and 1.</td>
+    <td class="code">
+      <pre><code>df['attribute_name'] = 
+df['attribute_name'] / df['attribute_name'].max()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Binning</td>
+    <td class="description">Create bins of data for better analysis and visualization.</td>
+    <td class="code">
+      <pre><code>bins = np.linspace(min(df['attribute_name']), 
+max(df['attribute_name']), n)
+# n is the number of bins needed 
+GroupNames = ['Group1', 'Group2', 'Group3', ...]
+df['binned_attribute_name'] = 
+pd.cut(df['attribute_name'], bins, labels=GroupNames, include_lowest=True)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Change column name</td>
+    <td class="description">Change the label name of a dataframe column.</td>
+    <td class="code">
+      <pre><code>df.rename(columns={'old_name': 'new_name'}, inplace=True)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Indicator Variables</td>
+    <td class="description">Create indicator variables for categorical data.</td>
+    <td class="code">
+      <pre><code>dummy_variable = pd.get_dummies(df['attribute_name'])
+df = pd.concat([df, dummy_variable], axis=1)</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+
+<body>
+
+<h2>3. Cheat Sheet: Exploratory Data Analysis</h2>
+
+<table>
+  <tr>
+    <th>Package/Method</th>
+    <th class="description">Description</th>
+    <th class="code">Code Example</th>
+  </tr>
+  <tr>
+    <td>Complete dataframe correlation</td>
+    <td class="description">Correlation matrix created using all the attributes of the dataset.</td>
+    <td class="code">
+      <pre><code>df.corr()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Specific Attribute correlation</td>
+    <td class="description">Correlation matrix created using specific attributes of the dataset.</td>
+    <td class="code">
+      <pre><code>df[['attribute1','attribute2',...]].corr()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Scatter Plot</td>
+    <td class="description">Create a scatter plot using the data points of the dependent variable along the x-axis and the independent variable along the y-axis.</td>
+    <td class="code">
+      <pre><code>from matplotlib import pyplot as plt
+plt.scatter(df[['attribute_1']],df[['attribute_2']])</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Regression Plot</td>
+    <td class="description">Uses the dependent and independent variables in a Pandas data frame to create a scatter plot with a generated linear regression line for the data.</td>
+    <td class="code">
+      <pre><code>import seaborn as sns
+sns.regplot(x='attribute_1',y='attribute_2', data=df, line_kws={"color": "red"})</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Box plot</td>
+    <td class="description">Create a box-and-whisker plot that uses the pandas dataframe, the dependent, and the independent variables.</td>
+    <td class="code">
+      <pre><code>import seaborn as sns
+sns.boxplot(x='attribute_1',y='attribute_2', data=df)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Grouping by attributes</td>
+    <td class="description">Create a group of different attributes of a dataset to create a subset of the data.</td>
+    <td class="code">
+      <pre><code>df_group = df[['attribute_1','attribute_2',...]]</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>GroupBy statements</td>
+    <td class="description">a. Group the data by different categories of an attribute, displaying the average value of numerical attributes with the same category.
+b. Group the data by different categories of multiple attributes, displaying the average value of numerical attributes with the same category.</td>
+    <td class="code">
+      <pre><code>a.
+df_group = df_group.groupby(['attribute_1'],as_index=False).mean()
+b.
+df_group = df_group.groupby(['attribute_1', 'attribute_2'],as_index=False).mean()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Pivot Tables</td>
+    <td class="description">Create Pivot tables for better representation of data based on parameters</td>
+    <td class="code">
+      <pre><code>grouped_pivot = df_group.pivot(index='attribute_1',columns='attribute_2')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Pseudocolor plot</td>
+    <td class="description">Create a heatmap image using a PseudoColor plot (or pcolor) using the pivot table as data.</td>
+    <td class="code">
+      <pre><code>from matplotlib import pyplot as plt
+plt.pcolor(grouped_pivot, cmap='RdBu')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Pearson Coefficient and p-value</td>
+    <td class="description">Calculate the Pearson Coefficient and p-value of a pair of attributes.</td>
+    <td class="code">
+      <pre><code>from scipy import stats
+pearson_coef, p_value = stats.pearsonr(df['attribute_1'], df['attribute_2'])</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+
+
+<body>
+
+
+<h2>4. Cheat Sheet: Model Development</h2>
+
+<table>
+  <tr>
+    <th>Process</th>
+    <th class="description">Description</th>
+    <th class="code">Code Example</th>
+  </tr>
+  <tr>
+    <td>Linear Regression</td>
+    <td class="description">Create a Linear Regression model object</td>
+    <td class="code">
+      <pre><code>from sklearn.linear_model import LinearRegression
+lr = LinearRegression()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Train Linear Regression model</td>
+    <td class="description">Train the Linear Regression model on decided data, separating Input and Output attributes. When there is single attribute in input, then it is simple linear regression. When there are multiple attributes, it is multiple linear regression.</td>
+    <td class="code">
+      <pre><code>X = df[['attribute_1', 'attribute_2', ...]]
+Y = df['target_attribute']
+lr.fit(X,Y)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Generate output predictions</td>
+    <td class="description">Predict the output for a set of Input attribute values.</td>
+    <td class="code">
+      <pre><code>Y_hat = lr.predict(X)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Identify the coefficient and intercept</td>
+    <td class="description">Identify the slope coefficient and intercept values of the linear regression model defined by \(y = mX + c\). Where m is the slope coefficient and c is the intercept.</td>
+    <td class="code">
+      <pre><code>coeff = lr.coef_
+intercept = lr.intercept_</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Residual Plot</td>
+    <td class="description">This function will regress y on x (possibly as a robust or polynomial regression) and then draw a scatterplot of the residuals.</td>
+    <td class="code">
+      <pre><code>import seaborn as sns 
+sns.residplot(x=df[['attribute_1']], 
+y=df[['attribute_2']])</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Distribution Plot</td>
+    <td class="description">This function can be used to plot the distribution of data w.r.t. a given attribute.</td>
+    <td class="code">
+      <pre><code>import seaborn as sns  
+sns.distplot(df['attribute_name'], hist=False)
+# can include other parameters like color, label and so on.</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Polynomial Regression</td>
+    <td class="description">Available under the numpy package, for single variable feature creation and model fitting.</td>
+    <td class="code">
+      <pre><code>f = np.polyfit(x, y, n)
+#creates the polynomial features of order n
+p = np.poly1d(f)
+#p becomes the polynomial model used to generate the predicted output
+Y_hat = p(x)
+# Y_hat is the predicted output</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Multi-variate Polynomial Regression</td>
+    <td class="description">Generate a new feature matrix consisting of all polynomial combinations of the features with the degree less than or equal to the specified degree.</td>
+    <td class="code">
+      <pre><code>from sklearn.preprocessing import PolynomialFeatures
+Z = df[['attribute_1','attribute_2',...]] 
+pr=PolynomialFeatures(degree=n)
+Z_pr=pr.fit_transform(Z)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Pipeline</td>
+    <td class="description">Data Pipelines simplify the steps of processing the data. We create the pipeline by creating a list of tuples including the name of the model or estimator and its corresponding constructor.</td>
+    <td class="code">
+      <pre><code>from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+Input=[('scale',StandardScaler()), ('polynomial',
+PolynomialFeatures(include_bias=False)), 
+('model',LinearRegression())]
+pipe=Pipeline(Input)
+Z = Z.astype(float)
+pipe.fit(Z,y)
+ypipe=pipe.predict(Z)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>R² value</td>
+    <td class="description">R², also known as the coefficient of determination, is a measure to indicate how close the data is to the fitted regression line. The value of the R-squared is the percentage of variation of the response variable that is explained by a linear model.
+    <br>a. For Linear Regression (single or multi attribute)
+    <br>b. For Polynomial regression (single or multi attribute)</td>
+    <td class="code">
+      a.
+      <pre><code>X = df[['attribute_1', 'attribute_2', ...]]
+Y = df['target_attribute']
+lr.fit(X,Y)
+R2_score = lr.score(X,Y)</code></pre>
+      b.
+      <pre><code>from sklearn.metrics import r2_score
+f = np.polyfit(x, y, n)
+p = np.poly1d(f)
+R2_score = r2_score(y, p(x))</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>MSE value</td>
+    <td class="description">The Mean Squared Error measures the average of the squares of errors, that is, the difference between actual value and the estimated value.</td>
+    <td class="code">
+      <pre><code>from sklearn.metrics import mean_squared_error
+mse = mean_squared_error(Y, Y_hat)</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+
+<body>
+
+
+<h2>5. Cheat Sheet: Model Evaluation and Refinement</h2>
+
+<table>
+  <tr>
+    <th>Process</th>
+    <th class="description">Description</th>
+    <th class="code">Code Example</th>
+  </tr>
+  <tr>
+    <td>Splitting data for training and testing</td>
+    <td class="description">The process involves first separating the target attribute from the rest of the data. Treat the target attribute as the output and the rest of the data as input. Now split the input and output datasets into training and testing subsets.</td>
+    <td class="code">
+      <pre><code>from sklearn.model_selection import train_test_split
+y_data = df['target_attribute']
+x_data=df.drop('target_attribute',axis=1)
+x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, test_size=0.10, random_state=1)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Cross validation score</td>
+    <td class="description">Without sufficient data, you go for cross validation, which involves creating different subsets of training and testing data multiple times and evaluating performance across all of them using the R² value.</td>
+    <td class="code">
+      <pre><code>from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import LinearRegression lre=LinearRegression()
+Rcross = cross_val_score(lre,x_data[['attribute_1']],y_data,cv=n)  
+# n indicates number of times, or folds, for which the cross validation is to be done
+Mean = Rcross.mean()
+Std_dev = Rcross.std()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Cross validation prediction</td>
+    <td class="description">Use a cross validated model to create prediction of the output.</td>
+    <td class="code">
+      <pre><code>from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import LinearRegression 
+lre=LinearRegression()
+yhat = cross_val_predict(lre,x_data[['attribute_1']], y_data,cv=4)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Ridge Regression and Prediction</td>
+    <td class="description">To create a better fitting polynomial regression model, like , one that avoids overfitting to the training data, we use the Ridge regression model with a parameter alpha that is used to modify the effect of higher-order parameters on the model prediction.</td>
+    <td class="code">
+      <pre><code>from sklearn.linear_model import Ridge
+pr=PolynomialFeatures(degree=2) x_train_pr=pr.fit_transform(x_train[['attribute_1', 'attribute_2', ...]])
+x_test_pr=pr.fit_transform(x_test[['attribute_1', 'attribute_2',...]])
+RigeModel=Ridge(alpha=1)
+RigeModel.fit(x_train_pr, y_train)
+yhat = RigeModel.predict(x_test_pr)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Grid Search</td>
+    <td class="description">Use Grid Search to find the correct alpha value for which the Ridge regression model gives the best performance. It further uses cross-validation to create a more refined model.</td>
+    <td class="code">
+      <pre><code>from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import Ridge
+parameters= [{'alpha': [0.001,0.1,1, 10, 100, 1000, 10000, ...]}]
+RR=Ridge()
+Grid1 = GridSearchCV(RR, parameters1,cv=4) Grid1.fit(x_data[['attribute_1', 'attribute_2', ...]], y_data)
+BestRR=Grid1.best_estimator_
+BestRR.score(x_test[['attribute_1', 'attribute_2', ...]], y_test)</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
