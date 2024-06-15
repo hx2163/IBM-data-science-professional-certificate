@@ -1,29 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Data Analysis with Python</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: left;
-            vertical-align: top;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .description {
-            width: 50%;
-        }
-        .code {
-            width: 30%;
-        }
-    </style>
-</head>
 <body>
 
 <h1>Data Analysis with Python</h1>
