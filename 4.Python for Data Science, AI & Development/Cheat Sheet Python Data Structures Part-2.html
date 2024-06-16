@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cheat Sheet: Python Data Structures Part-2</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .description {
+            width: 50%;
+        }
+        .code {
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Cheat Sheet: Python Data Structures Part-2</h1>
+
+<h2>Dictionaries</h2>
+
+<table>
+  <tr>
+    <th>Package/Method</th>
+    <th class="description">Description</th>
+    <th class="code">Code Example</th>
+  </tr>
+  <tr>
+    <td>Creating a Dictionary</td>
+    <td class="description">A dictionary is a built-in data type that represents a collection of key-value pairs. Dictionaries are enclosed in curly braces { }.</td>
+    <td class="code">
+      <pre><code>dict_name = {} # Creates an empty dictionary
+person = { "name": "Alice", "age": 30, "city": "New York" }</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Accessing Values</td>
+    <td class="description">You can access the values in a dictionary using their corresponding keys.</td>
+    <td class="code">
+      <pre><code>value = dict_name["key"]</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Add or modify</td>
+    <td class="description">Insert a new key-value pair into the dictionary. If the key already exists, the value will be updated; otherwise, a new entry is created.</td>
+    <td class="code">
+      <pre><code>dict_name["key"] = value</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>del</td>
+    <td class="description">Removes the specified key-value pair from the dictionary. Raises a KeyError if the key does not exist.</td>
+    <td class="code">
+      <pre><code>del dict_name["key"]</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>update()</td>
+    <td class="description">The update() method merges the provided dictionary into the existing dictionary, adding or updating key-value pairs.</td>
+    <td class="code">
+      <pre><code>dict_name.update({key: value})</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>clear()</td>
+    <td class="description">The clear() method empties the dictionary, removing all key-value pairs within it. After this operation, the dictionary is still accessible and can be used further.</td>
+    <td class="code">
+      <pre><code>dict_name.clear()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Key existence</td>
+    <td class="description">You can check for the existence of a key in a dictionary using the in keyword.</td>
+    <td class="code">
+      <pre><code>if "key" in dict_name:
+    print("Key exists in the dictionary.")</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>copy()</td>
+    <td class="description">Creates a shallow copy of the dictionary. The new dictionary contains the same key-value pairs as the original, but they remain distinct objects in memory.</td>
+    <td class="code">
+      <pre><code>new_dict = dict_name.copy()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>keys()</td>
+    <td class="description">Retrieves all keys from the dictionary and converts them into a list. Useful for iterating or processing keys using list methods.</td>
+    <td class="code">
+      <pre><code>keys_list = list(dict_name.keys())</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>values()</td>
+    <td class="description">Retrieves all values from the dictionary and converts them into a list. This list can be used for further processing or analysis.</td>
+    <td class="code">
+      <pre><code>values_list = list(dict_name.values())</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>items()</td>
+    <td class="description">Retrieves all key-value pairs as tuples and converts them into a list of tuples. Each tuple contains a key and its corresponding value.</td>
+    <td class="code">
+      <pre><code>items_list = list(dict_name.items())</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cheat Sheet: Python Data Structures Part-2</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .description {
+            width: 50%;
+        }
+        .code {
+            width: 30%;
+        }
+    </style>
+
+<body>
+
+<h2>Sets</h2>
+
+<table>
+  <tr>
+    <th>Package/Method</th>
+    <th class="description">Description</th>
+    <th class="code">Code Example</th>
+  </tr>
+  <tr>
+    <td>add()</td>
+    <td class="description">Elements can be added to a set using the add() method. Duplicates are automatically removed, as sets only store unique values.</td>
+    <td class="code">
+      <pre><code>set_name.add(element)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>clear()</td>
+    <td class="description">The clear() method removes all elements from the set, resulting in an empty set. It updates the set in place.</td>
+    <td class="code">
+      <pre><code>set_name.clear()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>copy()</td>
+    <td class="description">The copy() method creates a shallow copy of the set. Any modifications to the copy won’t affect the original set.</td>
+    <td class="code">
+      <pre><code>new_set = set_name.copy()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Defining Sets</td>
+    <td class="description">A set is an unordered collection of unique elements. Sets are enclosed in curly braces { }. They are useful for storing distinct values and performing set operations.</td>
+    <td class="code">
+      <pre><code>empty_set = set() # Creating an empty set
+fruits = {"apple", "banana", "orange"}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>discard()</td>
+    <td class="description">Use the discard() method to remove a specific element from the set. It ignores the element if it is not found.</td>
+    <td class="code">
+      <pre><code>set_name.discard("apple")</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>issubset()</td>
+    <td class="description">The issubset() method checks if the current set is a subset of another set. It returns True if all elements of the current set are present in the other set, otherwise False.</td>
+    <td class="code">
+      <pre><code>is_subset = set1.issubset(set2)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>issuperset()</td>
+    <td class="description">The issuperset() method checks if the current set is a superset of another set. It returns True if all elements of the other set are present in the current set, otherwise False.</td>
+    <td class="code">
+      <pre><code>is_superset = set1.issuperset(set2)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>pop()</td>
+    <td class="description">The pop() method removes and returns an arbitrary element from the set. It raises a KeyError if the set is empty. Use this method to remove elements when the order doesn’t matter.</td>
+    <td class="code">
+      <pre><code>removed_element = set_name.pop()</code></pre>
+    </td>
+  </tr
+

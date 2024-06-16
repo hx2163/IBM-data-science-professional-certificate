@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cheat Sheet: Data Preprocessing Tasks in Pandas</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .description {
+            width: 50%;
+        }
+        .code {
+            width: 30%;
+        }
+        img {
+            width: 200px; /* Set fixed width */
+            height: 120px; /* Set fixed height */
+        }
+    </style>
+</head>
+<body>
+<h1>Data Visualization with Python</h1>
+<h2>Cheat Sheet: Data Preprocessing Tasks in Pandas</h2>
+
+<table>
+  <tr>
+    <th>Task</th>
+    <th>Syntax</th>
+    <th class="description">Description</th>
+    <th class="code">Example</th>
+  </tr>
+  <tr>
+    <td>Load CSV data</td>
+    <td>pd.read_csv('filename.csv')</td>
+    <td class="description">Read data from a CSV file into a Pandas DataFrame</td>
+    <td class="code">
+      <pre><code>df_can = pd.read_csv('data.csv')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Handling Missing Values</td>
+    <td>df.dropna()<br>df.fillna(value)</td>
+    <td class="description">Drop rows with missing values<br>Fill missing values with a specified value</td>
+    <td class="code">
+      <pre><code>df_can.dropna()
+df_can.fillna(0)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Removing Duplicates</td>
+    <td>df.drop_duplicates()</td>
+    <td class="description">Remove duplicate rows</td>
+    <td class="code">
+      <pre><code>df_can.drop_duplicates()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Renaming Columns</td>
+    <td>df.rename(columns={'old_name': 'new_name'})</td>
+    <td class="description">Rename one or more columns</td>
+    <td class="code">
+      <pre><code>df_can.rename(columns={'Age': 'Years'})</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Selecting Columns</td>
+    <td>df['column_name']<br>df.column_name<br>df[['col1', 'col2']]</td>
+    <td class="description">Select a single column<br>Select a single column<br>Select multiple columns</td>
+    <td class="code">
+      <pre><code>df_can.Age or df_can['Age']
+df_can[['Name', 'Age']]</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Filtering Rows</td>
+    <td>df[df['column'] > value]</td>
+    <td class="description">Filter rows based on a condition</td>
+    <td class="code">
+      <pre><code>df_can[df_can['Age'] > 30]</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Applying Functions to Columns</td>
+    <td>df['column'].apply(function_name)</td>
+    <td class="description">Apply a function to transform values in a column</td>
+    <td class="code">
+      <pre><code>df_can['Age'].apply(lambda x: x + 1)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Creating New Columns</td>
+    <td>df['new_column'] = expression</td>
+    <td class="description">Create a new column with values derived from existing ones</td>
+    <td class="code">
+      <pre><code>df_can['Total'] = df_can['Quantity'] * df_can['Price']</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Grouping and Aggregating</td>
+    <td>df.groupby('column').agg({'col1': 'sum', 'col2': 'mean'})</td>
+    <td class="description">Group rows by a column and apply aggregate functions</td>
+    <td class="code">
+      <pre><code>df_can.groupby('Category').agg({'Total': 'mean'})</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Sorting Rows</td>
+    <td>df.sort_values('column', ascending=True/False)</td>
+    <td class="description">Sort rows based on a column</td>
+    <td class="code">
+      <pre><code>df_can.sort_values('Date', ascending=True)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Displaying First n Rows</td>
+    <td>df.head(n)</td>
+    <td class="description">Show the first n rows of the DataFrame</td>
+    <td class="code">
+      <pre><code>df_can.head(3)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Displaying Last n Rows</td>
+    <td>df.tail(n)</td>
+    <td class="description">Show the last n rows of the DataFrame</td>
+    <td class="code">
+      <pre><code>df_can.tail(3)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Checking for Null Values</td>
+    <td>df.isnull()</td>
+    <td class="description">Check for null values in the DataFrame</td>
+    <td class="code">
+      <pre><code>df_can.isnull()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Selecting Rows by Index</td>
+    <td>df.iloc[index]<br>df.iloc[start:end]</td>
+    <td class="description">Select rows based on integer index<br>Select rows in a specified range</td>
+    <td class="code">
+      <pre><code>df_can.iloc[3]
+df_can.iloc[2:5]</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Selecting Rows by Label</td>
+    <td>df.loc[label]<br>df.loc[start:end]</td>
+    <td class="description">Select rows based on label/index name<br>Select rows in a specified label/index range</td>
+    <td class="code">
+      <pre><code>df_can.loc['Label']
+df_can.loc['Age':'Quantity']</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Summary Statistics</td>
+    <td>df.describe()</td>
+    <td class="description">Generates descriptive statistics for numerical columns</td>
+    <td class="code">
+      <pre><code>df_can.describe()</code></pre>
+    </td>
+  </tr>
+</table>
+
+<h2>Cheat Sheet: Plot Libraries</h2>
+
+<table>
+  <tr>
+    <th>Library</th>
+    <th>Main Purpose</th>
+    <th>Key Features</th>
+    <th>Programming Language</th>
+    <th>Level of Customization</th>
+    <th>Dashboard Capabilities</th>
+    <th>Types of Plots Possible</th>
+  </tr>
+  <tr>
+    <td>Matplotlib</td>
+    <td>General-purpose plotting</td>
+    <td>Comprehensive plot types and variety of customization options</td>
+    <td>Python</td>
+    <td>High</td>
+    <td>Requires additional components and customization</td>
+    <td>Line plots, scatter plots, bar charts, histograms, pie charts, box plots, heatmaps, etc.</td>
+  </tr>
+  <tr>
+    <td>Pandas</td>
+    <td>Fundamentally used for data manipulation but also has plotting functionality</td>
+    <td>Easy to plot directly on Panda data structures</td>
+    <td>Python</td>
+    <td>Medium</td>
+    <td>Can be combined with web frameworks for creating dashboards</td>
+    <td>Line plots, scatter plots, bar charts, histograms, pie charts, box plots, etc.</td>
+  </tr>
+  <tr>
+    <td>Seaborn</td>
+    <td>Statistical data visualization</td>
+    <td>Stylish, specialized statistical plot types</td>
+    <td>Python</td>
+    <td>Medium</td>
+    <td>Can be combined with other libraries to display plots on dashboards</td>
+    <td>Heatmaps, violin plots, scatter plots, bar plots, count plots, etc.</td>
+  </tr>
+  <tr>
+    <td>Plotly</td>
+    <td>Interactive data visualization</td>
+    <td>Interactive web-based visualizations</td>
+    <td>Python, R, JavaScript</td>
+    <td>High</td>
+    <td>Dash framework is dedicated for building interactive dashboards</td>
+    <td>Line plots, scatter plots, bar charts, pie charts, 3D plots, choropleth maps, etc.</td>
+  </tr>
+  <tr>
+    <td>Folium</td>
+    <td>Geospatial data visualization</td>
+    <td>Interactive, customizable maps</td>
+    <td>Python</td>
+    <td>Medium</td>
+    <td>For incorporating maps into dashboards, it can be integrated with other frameworks/libraries</td>
+    <td>Choropleth maps, point maps, heatmaps, etc.</td>
+  </tr>
+  <tr>
+    <td>PyWaffle</td>
+    <td>Plotting Waffle charts</td>
+    <td>Waffle charts</td>
+    <td>Python</td>
+    <td>Low</td>
+    <td>Can be combined with other libraries to display waffle chart on dashboards</td>
+    <td>Waffle charts, square pie charts, donut charts, etc.</td>
+  </tr>
+</table>
+
+</body>
+
+<body>
+
+<h2>Cheat Sheet: Plot Types</h2>
+
+<table>
+  <tr>
+    <th>Plot Type</th>
+    <th class="description">Description</th>
+    <th class="code">Pandas Function</th>
+    <th class="code">Example</th>
+    <th class="visual">Visual</th>
+  </tr>
+  <tr>
+    <td>Line Plot</td>
+    <td class="description">Shows trends and changes over time</td>
+    <td class="code">DataFrame.plot.line()<br>DataFrame.plot(kind='line')</td>
+    <td class="code">
+      <pre><code>df.plot(x='year', y='sales', kind='line')</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual1.png" alt="Line Plot"></td>
+  </tr>
+  <tr>
+    <td>Area Plot</td>
+    <td class="description">Displays data series as filled areas, showing the relationship between them</td>
+    <td class="code">DataFrame.plot.area()<br>DataFrame.plot(kind='area')</td>
+    <td class="code">
+      <pre><code>df.plot(kind='area')</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual2.png" alt="Area Plot"></td>
+  </tr>
+  <tr>
+    <td>Histogram</td>
+    <td class="description">Displays bars representing the data count in each interval/bin</td>
+    <td class="code">Series.plot.hist()<br>Series.plot(kind='hist', bins=n)</td>
+    <td class="code">
+      <pre><code>s.plot(kind='hist', bins=10)
+df['age'].plot(kind='hist', bins=10)</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual3.png" alt="Histogram"></td>
+  </tr>
+  <tr>
+    <td>Bar Chart</td>
+    <td class="description">Displays data using rectangular bars</td>
+    <td class="code">DataFrame.plot.bar()<br>DataFrame.plot(kind='bar')</td>
+    <td class="code">
+      <pre><code>df.plot(kind='bar')</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual4.png" alt="Bar Chart"></td>
+  </tr>
+  <tr>
+    <td>Pie Chart</td>
+    <td class="description">Displays data as a circular plot divided into slices, representing proportions or percentages of a whole</td>
+    <td class="code">Series.plot.pie()<br>Series.plot(kind='pie')<br>DataFrame.plot.pie(y, labels)<br>DataFrame.plot(kind='pie')</td>
+    <td class="code">
+      <pre><code>s.plot(kind='pie', autopct='%1.1f%%')
+df.plot(x='Category', y='Percentage', kind='pie')</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual5.png" alt="Pie Chart"></td>
+  </tr>
+  <tr>
+    <td>Box Plot</td>
+    <td class="description">Displays the distribution of a dataset along with key statistical measures</td>
+    <td class="code">DataFrame.plot.box()<br>DataFrame.plot(kind='box')</td>
+    <td class="code">
+      <pre><code>df_can.plot(kind='box')</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual6.png" alt="Box Plot"></td>
+  </tr>
+  <tr>
+    <td>Scatter Plot</td>
+    <td class="description">Uses Cartesian coordinates to display values for two variables</td>
+    <td class="code">DataFrame.plot.scatter()<br>DataFrame.plot(x, y, kind='scatter')</td>
+    <td class="code">
+      <pre><code>df.plot(x='Height', y='Weight', kind='scatter')</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual7.png" alt="Scatter Plot"></td>
+  </tr>
+</table>
+
+</body>
+
+<body>
+
+<h2>Cheat Sheet: Plotting directly with Matplotlib</h2>
+
+<table>
+  <tr>
+    <th>Plot Type</th>
+    <th class="description">Description</th>
+    <th class="code">Matplotlib Function</th>
+    <th class="code">Example</th>
+    <th class="visual">Visual</th>
+  </tr>
+  <tr>
+    <td>Line Plot</td>
+    <td class="description">Shows trends and changes over time</td>
+    <td class="code">plt.plot()</td>
+    <td class="code">
+      <pre><code>plt.plot(x, y, color='red', linewidth=2)</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual8.png" alt="Line Plot2"></td>
+  </tr>
+  <tr>
+    <td>Area Plot</td>
+    <td class="description">Display data series as filled areas</td>
+    <td class="code">plt.fill_between()</td>
+    <td class="code">
+      <pre><code>plt.fill_between(x, y1, y2, color='blue', alpha=0.5)</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual9.png" alt="Area Plot2"></td>
+  </tr>
+  <tr>
+    <td>Histogram</td>
+    <td class="description">Displays bars representing the data count in each interval/bin</td>
+    <td class="code">plt.hist()</td>
+    <td class="code">
+      <pre><code>plt.hist(data, bins=10, color='orange', edgecolor='black')</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual10.png" alt="Histogram"></td>
+  </tr>
+  <tr>
+    <td>Bar Chart</td>
+    <td class="description">Displays data using rectangular bars</td>
+    <td class="code">plt.bar()</td>
+    <td class="code">
+      <pre><code>plt.bar(x, height, color='green', width=0.5)</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual11.png" alt="Bar Chart"></td>
+  </tr>
+  <tr>
+    <td>Pie Chart</td>
+    <td class="description">Displays data as a circular plot divided into slices, representing proportions or percentages of a whole</td>
+    <td class="code">plt.pie()</td>
+    <td class="code">
+      <pre><code>plt.pie(sizes, labels=labels, colors=colors, explode=explode)</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual12.png" alt="Pie Chart"></td>
+  </tr>
+  <tr>
+    <td>Box Plot</td>
+    <td class="description">Displays the distribution of a dataset along with key statistical measures</td>
+    <td class="code">plt.boxplot()</td>
+    <td class="code">
+      <pre><code>plt.boxplot(data, notch=True)</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual13.png" alt="Box Plot"></td>
+  </tr>
+  <tr>
+    <td>Scatter Plot</td>
+    <td class="description">Uses Cartesian coordinates to display values for two variables</td>
+    <td class="code">plt.scatter()</td>
+    <td class="code">
+      <pre><code>plt.scatter(x, y, color='purple', marker='o', s=50)</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual14.png" alt="Scatter Plot"></td>
+  </tr>
+  <tr>
+    <td>Subplotting</td>
+    <td class="description">Creating multiple plots on one figure</td>
+    <td class="code">plt.subplots()</td>
+    <td class="code">
+      <pre><code>fig, axes = plt.subplots(nrows=2, ncols=2)</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual15.png" alt="Subplotting"></td>
+  </tr>
+  <tr>
+    <td>Customization</td>
+    <td class="description">Customizing plot: adding labels, title, legend, grid</td>
+    <td class="code">Various customization</td>
+    <td class="code">
+      <pre><code>plt.title('Title')
+plt.xlabel('X Label')
+plt.ylabel('Y Label')
+plt.legend()
+plt.grid(True)</code></pre>
+    </td>
+    <td class="visual"><img src="images2/visual16.png" alt="Customization"></td>
+  </tr>
+</table>
+
+</body>
+
+
+<body>
+
+<h2>Cheat Sheet: Maps, Waffles, WordCloud and Seaborn</h2>
+
+<table>
+  <tr>
+    <th>Function</th>
+    <th class="description">Description</th>
+    <th>Syntax</th>
+    <th class="code">Example</th>
+    <th class="visual">Visual</th>
+  </tr>
+  <tr>
+    <td colspan="5"><strong>Folium</strong></td>
+  </tr>
+  <tr>
+    <td>Map</td>
+    <td class="description">Create a map object with specified center coordinates and zoom level.</td>
+    <td>folium.Map(location=[lat, lon], zoom_start=n)</td>
+    <td class="code">
+      <pre><code>world_map = folium.Map()
+canada = folium.Map(location=[56.130, -106.35], zoom_start=4)</code></pre>
+    </td>
+    <td class="visual"><img src="images/visual1.png" alt="Map Visual"></td>
+  </tr>
+  <tr>
+    <td>Marker</td>
+    <td class="description">Add a marker to the map with custom icon, popup, and tiles</td>
+    <td>folium.Marker(location=[lat , lon ], popup='Marker Popup', tiles='Stamen Toner').add_to(map)</td>
+    <td class="code">
+      <pre><code>folium.Marker(location=[56.130, -106.35], 
+tooltip='Marker',
+tiles='Stamen Toner').add_to(world_map)</code></pre>
+    </td>
+    <td class="visual"><img src="images/visual2.png" alt="Marker Visual"></td>
+  </tr>
+  <tr>
+    <td>Circle</td>
+    <td class="description">Add a circle to the map with specified radius, color, and fill opacity.</td>
+    <td>folium.features.CircleMarker(location=[lat, lon], radius=n, color='red', fill_opacity=n).add_to(map)</td>
+    <td class="code">
+      <pre><code>folium.features.CircleMarker(location=[56.130, -106.35], 
+radius=1000, color='red', 
+fill_opacity=0.5).add_to(world_map)</code></pre>
+    </td>
+    <td class="visual"><img src="images/visual3.png" alt="Circle Visual"></td>
+  </tr>
+  <tr>
+    <td>Chorpleth</td>
+    <td class="description">Create a choropleth map based on a GeoJSON file and a specified data column.</td>
+    <td>folium.Choropleth(geo_data='path/to/geojson_file',
+data=df, columns=['region', 'value_column'],
+key_on='feature.properties.id', fill_color='YlGnBu', 
+fill_opacity=0.7, line_opacity=0.2, 
+legend_name='Legend').add_to(map)</td>
+    <td class="code">
+      <pre><code>world_map.choropleth(geo_data=world_geo, 
+data=df_can, columns=['Country', 'Total'],
+key_on='feature.properties.name', fill_color='YlOrRd',
+fill_opacity=0.7,line_opacity=0.2,
+legend_name='Immigration to Canada')</code></pre>
+    </td>
+    <td class="visual"><img src="images/visual4.png" alt="Choropleth Visual"></td>
+  </tr>
+  <tr>
+    <td colspan="5"><strong>PyWaffle</strong></td>
+  </tr>
+  <tr>
+    <td>Waffle</td>
+    <td class="description">Create a waffle chart based on values and categories.</td>
+    <td>plt.figure(FigureClass=Waffle, rows=20, columns=30, values=values)</td>
+    <td class="code">
+      <pre><code>plt.figure(FigureClass=Waffle, rows=20, columns=30,
+ values=df_dsn['Total'], cmap_name='tab20',
+legend={'labels': label, 'loc': 'lower left',
+'bbox_to_anchor': (0, -0.1), 'ncol': 3})</code></pre>
+    </td>
+    <td class="visual"><img src="images/visual5.png" alt="Waffle Chart Visual"></td>
+  </tr>
+  <tr>
+    <td>Legend</td>
+    <td class="description">Add a legend to the waffle chart.</td>
+    <td>waffle_chart.legend(loc='upper left', bbox_to_anchor=(1, 1))</td>
+    <td class="code"></td>
+    <td class="visual"></td>
+  </tr>
+  <tr>
+    <td>Title</td>
+    <td class="description">Add a title to the waffle chart.</td>
+    <td>waffle_chart.set_title('Waffle Chart Title')</td>
+    <td class="code"></td>
+    <td class="visual"></td>
+  </tr>
+  <tr>
+    <td>Labels</td>
+    <td class="description">Add labels to the waffle chart.</td>
+    <td>waffle_chart.set_labels(['Label 1', 'Label 2', ...])</td>
+    <td class="code"></td>
+    <td class="visual"></td>
+  </tr>
+  <tr>
+    <td colspan="5"><strong>WordCloud</strong></td>
+  </tr>
+  <tr>
+    <td>WordCloud</td>
+    <td class="description">Create a word cloud object based on text data.</td>
+    <td>wordcloud = WordCloud().generate(text_data)</td>
+    <td class="code">
+      <pre><code>alice_wc = WordCloud(background_color='white', max_words=2000, mask=alice_mask, stopwords=stopwords)
+alice_wc.generate(alice_novel)
+plt.imshow(alice_wc, interpolation='bilinear')</code></pre>
+    </td>
+    <td class="visual"><img src="images/visual6.png" alt="WordCloud Visual"></td>
+  </tr>
+  <tr>
+    <td>Generate</td>
+    <td class="description">Generate the word cloud based on the text data.</td>
+    <td>wordcloud.generate(text_data)</td>
+    <td class="code"></td>
+    <td class="visual"></td>
+  </tr>
+  <tr>
+    <td>Display</td>
+    <td class="description">Display the word cloud using matplotlib or other plotting libraries.</td>
+    <td>plt.imshow(wordcloud, interpolation='bilinear')</td>
+    <td class="code"></td>
+    <td class="visual"></td>
+  </tr>
+  <tr>
+    <td>Options</td>
+    <td class="description">Set various options for the word cloud, such as font, colors, mask, and stopwords.</td>
+    <td>wordcloud = WordCloud(font_path='path/to/font_file',
+background_color='white',
+colormap='Blues', mask=mask_image, 
+stopwords=stopwords).generate(text_data)</td>
+    <td class="code"></td>
+    <td class="visual"></td>
+  </tr>
+  <tr>
+    <td colspan="5"><strong>Seaborn</strong></td>
+  </tr>
+  <tr>
+    <td>barplot</td>
+    <td class="description">Create a bar plot to visualize the relationship between a categorical variable and a numeric variable.</td>
+    <td>sns.barplot(x='x_variable', y='y_variable', data=dataframe)</td>
+    <td class="code">
+      <pre><code>sns.barplot(x='Continent', y='Total', data=df_can1)</td>
+    <td class="visual"><img src="images/visual7.png" alt="Barplot Visual"></td>
+  </tr>
+  <tr>
+    <td>countplot</td>
+    <td class="description">Create a count plot to display the frequency of each category in a categorical variable.</
+    <td class="description">Create a count plot to display the frequency of each category in a categorical variable.</td>
+    <td>sns.countplot(x='category', data=dataframe)</td>
+    <td class="code">
+      <pre><code>sns.countplot(x='Continent', data=df_can)</code></pre>
+    </td>
+    <td class="visual"><img src="images/visual8.png" alt="Countplot Visual"></td>
+  </tr>
+  <tr>
+    <td>regplot</td>
+    <td class="description">Create a scatter plot with a linear regression line to visualize the relationship between two numeric variables.</td>
+    <td>sns.regplot(x='x_variable', y='y_variable', data=dataframe)</td>
+    <td class="code">
+      <pre><code>sns.regplot(x='year', y='total', data=df_tot)</code></pre>
+    </td>
+    <td class="visual"><img src="images/visual9.png" alt="Regplot Visual"></td>
+  </tr>
+</table>
+
+</body>
+
+<body>
+
+<h2>Cheat Sheet: Plotly and Dash</h2>
+
+<table>
+  <tr>
+    <th>Function</th>
+    <th class="description">Description</th>
+    <th>Syntax</th>
+    <th class="code">Example</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Plotly Express</strong></td>
+  </tr>
+  <tr>
+    <td>scatter</td>
+    <td class="description">Create a scatter plot</td>
+    <td>px.scatter(dataframe, x=x_column, y=y_column)</td>
+    <td class="code">
+      <pre><code>px.scatter(df, x=age_array, y=income_array)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>line</td>
+    <td class="description">Create a line plot</td>
+    <td>px.line(x=x_column, y=y_column, title='title')</td>
+    <td class="code">
+      <pre><code>px.line(x=months_array, y=no_bicycle_sold_array)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>bar</td>
+    <td class="description">Create a bar plot</td>
+    <td>px.bar(x=x_column, y=y_column, title='title')</td>
+    <td class="code">
+      <pre><code>px.bar(x=grade_array, y=score_array, title='Pass Percentage')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>sunburst</td>
+    <td class="description">Create a sunburst plot</td>
+    <td>px.sunburst(dataframe, path=[col1, col2, ...], values='column', title='title')</td>
+    <td class="code">
+      <pre><code>px.sunburst(data, path=['Month', 'DestStateName'], values='Flights', title='Flight Distribution Hierarchy')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>histogram</td>
+    <td class="description">Create a histogram</td>
+    <td>px.histogram(x=x, title='title')</td>
+    <td class="code">
+      <pre><code>px.histogram(x=heights_array, title='Distribution of Heights')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>bubble</td>
+    <td class="description">Create a bubble chart</td>
+    <td>px.scatter(dataframe, x=x, y=y, size=size, title='title')</td>
+    <td class="code">
+      <pre><code>px.scatter(bub_data, x='City', y='Numberofcrimes', size='Numberofcrimes', hover_name='City', title='Crime Statistics')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>pie</td>
+    <td class="description">Create a pie chart</td>
+    <td>px.pie(values=x, names=y, title='title')</td>
+    <td class="code">
+      <pre><code>px.pie(values=exp_percent, names=house_holdcategories, title='Household Expenditure')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Plotly Graph Objects</strong></td>
+  </tr>
+  <tr>
+    <td>Scatter</td>
+    <td class="description">Create a scatter plot</td>
+    <td>go.Scatter(x=x, y=y, mode='markers')</td>
+    <td class="code">
+      <pre><code>go.Scatter(x=age_array, y=income_array, mode='markers')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Create a line plot</td>
+    <td class="description">Create a line plot</td>
+    <td>go.Scatter(x=x, y=y, mode='lines')</td>
+    <td class="code">
+      <pre><code>go.Bar(x=months_array, y=no_bicycle_sold_array, mode='lines')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>add_trace</td>
+    <td class="description">Add additional traces to an existing figure</td>
+    <td>fig.add_trace(trace_object)</td>
+    <td class="code">
+      <pre><code>fig.add_trace(go.Scatter(x=months_array, y=no_bicycle_sold_array))</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>update_layout</td>
+    <td class="description">Update the layout of a figure, such as title, axis labels, and annotations.</td>
+    <td>fig.update_layout(layout_object)</td>
+    <td class="code">
+      <pre><code>fig.update_layout(title='Bicycle Sales', xaxis_title='Months', yaxis_title='Number of Bicycles Sold')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Dash</strong></td>
+  </tr>
+  <tr>
+    <td>dash_core_components.Input</td>
+    <td class="description">Create an input component</td>
+    <td>dcc.Input(value='', type='text')</td>
+    <td class="code">
+      <pre><code>dcc.Input(value='Hello', type='text')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>dash_core_components.Graph</td>
+    <td class="description">Create a graph component</td>
+    <td>dcc.Graph(figure=fig)</td>
+    <td class="code">
+      <pre><code>dcc.Graph(figure=fig)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>dash_html_components.Div</td>
+    <td class="description">Create a div element</td>
+    <td>html.Div(children=component_list)</td>
+    <td class="code">
+      <pre><code>html.Div(children=[html.H1('Hello Dash'), html.P('Welcome to Dash')])</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>dash_core_components.Dropdown</td>
+    <td class="description">Create a dropdown component</td>
+    <td>dcc.Dropdown(options=options_list, value=default_value)</td>
+    <td class="code">
+      <pre><code>dcc.Dropdown(options=[{'label': 'Option 1', 'value': '1'}, {'label': 'Option 2', 'value': '2'}], value='1')</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+</html>

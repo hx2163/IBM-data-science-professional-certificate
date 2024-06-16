@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SQL Cheat Sheet: Basics</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .description {
+            width: 40%;
+        }
+        .code {
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+<h1>Databases and SQL for Data Science with Python</h1>
+<h2>SQL Cheat Sheet: Basics</h2>
+
+<table>
+  <tr>
+    <th>Command</th>
+    <th class="description">Syntax</th>
+    <th>Description</th>
+    <th class="code">Example</th>
+  </tr>
+  <tr>
+    <td>SELECT</td>
+    <td class="description">SELECT column1, column2, ... FROM table_name;</td>
+    <td>SELECT statement is used to fetch data from a database.</td>
+    <td class="code">
+      <pre><code>SELECT city FROM placeofinterest;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>WHERE</td>
+    <td class="description">SELECT column1, column2, ...FROM table_name WHERE condition;</td>
+    <td>WHERE clause is used to extract only those records that fulfill a specified condition.</td>
+    <td class="code">
+      <pre><code>SELECT * FROM placeofinterest WHERE city == 'Rome';</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>COUNT</td>
+    <td class="description">SELECT COUNT * FROM table_name;</td>
+    <td>COUNT is a function that takes the name of a column as argument and counts the number of rows when the column is not NULL.</td>
+    <td class="code">
+      <pre><code>SELECT COUNT(country) FROM placeofinterest WHERE country='Canada';</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DISTINCT</td>
+    <td class="description">SELECT DISTINCT columnname FROM table_name;</td>
+    <td>DISTINCT function is used to specify that the statement is a query which returns unique values in specified columns.</td>
+    <td class="code">
+      <pre><code>SELECT DISTINCT country FROM placeofinterest WHERE type='historical';</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>LIMIT</td>
+    <td class="description">SELECT * FROM table_name LIMIT number;</td>
+    <td>LIMIT is a clause to specify the maximum number of rows the result set must have.</td>
+    <td class="code">
+      <pre><code>SELECT * FROM placeofinterest WHERE airport="pearson" LIMIT 5;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>INSERT</td>
+    <td class="description">INSERT INTO table_name (column1,column2,column3...) VALUES(value1,value2,value3...);</td>
+    <td>INSERT is used to insert new rows in the table.</td>
+    <td class="code">
+      <pre><code>INSERT INTO placeofinterest (name,type,city,country,airport) VALUES('Niagara Waterfalls','Nature','Toronto','Canada','Pearson');</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>UPDATE</td>
+    <td class="description">UPDATE table_name SET[[column1]=[VALUES]] WHERE [condition];</td>
+    <td>UPDATE used to update the rows in the table.</td>
+    <td class="code">
+      <pre><code>UPDATE placeofinterest SET name = 'Niagara Falls' WHERE name = "Niagara Waterfalls";</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td class="description">DELETE FROM table_name WHERE [condition];</td>
+    <td>DELETE statement is used to remove rows from the table which are specified in the WHERE condition.</td>
+    <td class="code">
+      <pre><code>DELETE FROM placeofinterest WHERE city IN ('Rome','Vienna');</code></pre>
+    </td>
+  </tr>
+</table>
+</body>
+
+<body>
+
+<h2>SQL Cheat Sheet: CREATE TABLE, ALTER, DROP, TRUNCATE</h2>
+
+<table>
+  <tr>
+    <th>Command</th>
+    <th class="description">Syntax</th>
+    <th>Description</th>
+    <th class="code">Example</th>
+  </tr>
+  <tr>
+    <td>CREATE TABLE</td>
+    <td class="description">MySQL/DB2: CREATE TABLE table_name (col1 datatype optional keyword, col2 datatype optional keyword, col3 datatype optional keyword, ..., coln datatype optional keyword)</td>
+    <td>CREATE TABLE statement is to create the table. Each column in the table is specified with its name, data type, and an optional keyword which could be PRIMARY KEY, NOT NULL, etc.</td>
+    <td class="code">
+      <pre><code>MySQL/DB2: CREATE TABLE employee (
+ employee_id char(2) PRIMARY KEY, 
+ first_name varchar(30) NOT NULL, 
+ mobile int);</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>ALTER TABLE - ADD COLUMN</td>
+    <td class="description">MySQL/DB2:
+ Option 1. ALTER TABLE table_name ADD column_name_1 datatype....ADD COLUMN column_name_n datatype;
+ Option 2. ALTER TABLE table_name ADD COLUMN column_name_1 datatype....ADD COLUMN column_name_n datatype;</td>
+    <td>ALTER TABLE statement is used to add the columns to a table.</td>
+    <td class="code">
+      <pre><code>MySQL/DB2:
+ Option 1. ALTER TABLE employee ADD income bigint;
+ Option 2. ALTER TABLE employee ADD COLUMN income bigint;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>ALTER TABLE - ALTER COLUMN</td>
+    <td class="description">MySQL: ALTER TABLE table_name MODIFY COLUMN column_name_1 new_data_type;
+DB2: ALTER TABLE table_name ALTER COLUMN column_name_1 SET DATA TYPE datatype;</td>
+    <td>MODIFY COLUMN clause is used with the ALTER TABLE statement to modify the data type of columns.</td>
+    <td class="code">
+      <pre><code>MySQL: ALTER TABLE employee MODIFY COLUMN mobile SET DATA TYPE CHAR(20);
+DB2: ALTER TABLE employee ALTER COLUMN mobile SET DATA TYPE CHAR(20);</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>ALTER TABLE - DROP COLUMN</td>
+    <td class="description">MySQL/DB2: ALTER TABLE table_name DROP COLUMN column_name_1;</td>
+    <td>ALTER TABLE DROP COLUMN statement is used to remove columns from a table.</td>
+    <td class="code">
+      <pre><code>MySQL/DB2: ALTER TABLE employee DROP COLUMN mobile;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>ALTER TABLE - RENAME COLUMN</td>
+    <td class="description">MySQL: ALTER TABLE table_name CHANGE COLUMN current_column_name new_column_name datatype [optional keywords];
+DB2: ALTER TABLE table_name RENAME COLUMN current_column_name TO new_column_name;</td>
+    <td>CHANGE COLUMN clause is used to rename the columns in a table.</td>
+    <td class="code">
+      <pre><code>MySQL: ALTER TABLE employee CHANGE COLUMN first_name name VARCHAR(255);
+DB2: ALTER TABLE employee RENAME COLUMN first_name TO name;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>TRUNCATE TABLE</td>
+    <td class="description">MySQL: TRUNCATE TABLE table_name;
+DB2: TRUNCATE TABLE table_name IMMEDIATE;</td>
+    <td>TRUNCATE TABLE statement is used to delete all of the rows in a table.</td>
+    <td class="code">
+      <pre><code>MySQL: TRUNCATE TABLE employee;
+DB2: TRUNCATE TABLE employee IMMEDIATE;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DROP TABLE</td>
+    <td class="description">MySQL/DB2: DROP TABLE table_name;</td>
+    <td>Use the DROP TABLE statement to delete a table from a database. If you delete a table that contains data, by default the data will be deleted alongside the table.</td>
+    <td class="code">
+      <pre><code>MySQL/DB2: DROP TABLE employee;</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+<body>
+
+<h2>SQL Cheat Sheet: Intermediate - LIKE, ORDER BY, GROUP BY</h2>
+
+<table>
+  <tr>
+    <th>Command</th>
+    <th class="description">Syntax (MySQL/DB2)</th>
+    <th>Description</th>
+    <th class="code">Example (MySQL/DB2)</th>
+  </tr>
+  <tr>
+    <td>LIKE</td>
+    <td class="description">SELECT column1, column2, ... FROM table_name WHERE columnN LIKE pattern;</td>
+    <td>LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+        Two wildcards often used in conjunction with the LIKE operator are percent sign(%) and underscore sign (_), depending upon the SQL engine being used.</td>
+    <td class="code">
+      <pre><code>SELECT f_name, l_name FROM employees WHERE address LIKE '%Elgin,IL%';</code></pre>
+      This command will output all entries with Elgin,IL in the Address.
+    </td>
+  </tr>
+  <tr>
+    <td>BETWEEN</td>
+    <td class="description">SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2;</td>
+    <td>The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates. The BETWEEN operator is inclusive: begin and end values are included.</td>
+    <td class="code">
+      <pre><code>SELECT * FROM employees WHERE salary BETWEEN 40000 AND 80000;</code></pre>
+      This generates all records of employees with salaries between 40000 and 80000.
+    </td>
+  </tr>
+  <tr>
+    <td>ORDER BY</td>
+    <td class="description">SELECT column1, column2, ... FROM table_name ORDER BY column1, column2, ... ASC|DESC;</td>
+    <td>ORDER BY keyword is used to sort the result-set in ascending or descending order. The default is ascending. In case of multiple columns in ORDER BY, the sorting will be done in the sequence of the appearance of the arguments.</td>
+    <td class="code">
+      <pre><code>SELECT f_name, l_name, dep_id FROM employees ORDER BY dep_id DESC, l_name;</code></pre>
+      This displays the first name, last name, and department ID of employees, first sorted in descending order of department IDs and then sorted alphabetically as per their last names.
+    </td>
+  </tr>
+  <tr>
+    <td>GROUP BY</td>
+    <td class="description">SELECT column_name(s) FROM table_name GROUP BY column_name(s);</td>
+    <td>GROUP BY clause is used in collaboration with the SELECT statement to arrange data with identical values into groups.</td>
+    <td class="code">
+      <pre><code>SELECT dep_id, COUNT(*) FROM employees GROUP BY dep_id;</code></pre>
+      This returns the department IDs and the number of employees in them, grouped by the department IDs.
+    </td>
+  </tr>
+  <tr>
+    <td>HAVING</td>
+    <td class="description">SELECT column_name(s) FROM table_name GROUP BY column_name(s) HAVING condition;</td>
+    <td>HAVING clause is used in conjunction with GROUP BY clause in collaboration with the SELECT statement in order to filter the data as per the given condition and then group as per identical values of a specified parameter.</td>
+    <td class="code">
+      <pre><code>SELECT DEP_ID, COUNT(*) AS "NUM_EMPLOYEES", AVG(SALARY) AS "AVG_SALARY" 
+FROM EMPLOYEES 
+GROUP BY DEP_ID 
+HAVING count(*) &lt; 4 
+ORDER BY AVG_SALARY;</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+<body>
+
+<h2>SQL Cheat Sheet: FUNCTIONS and Implicit JOIN</h2>
+
+<table>
+  <tr>
+    <th>Command</th>
+    <th class="description">Syntax (MySQL/DB2)</th>
+    <th>Description</th>
+    <th class="code">Example (MySQL/DB2)</th>
+  </tr>
+  <tr>
+    <td>COUNT</td>
+    <td class="description">SELECT COUNT(column_name) FROM table_name WHERE condition;</td>
+    <td>COUNT function returns the number of rows that match a specified criterion.</td>
+    <td class="code">
+      <pre><code>SELECT COUNT(dep_id) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>AVG</td>
+    <td class="description">SELECT AVG(column_name) FROM table_name WHERE condition;</td>
+    <td>AVG function returns the average value of a numeric column.</td>
+    <td class="code">
+      <pre><code>SELECT AVG(salary) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>SUM</td>
+    <td class="description">SELECT SUM(column_name) FROM table_name WHERE condition;</td>
+    <td>SUM function returns the total sum of a numeric column.</td>
+    <td class="code">
+      <pre><code>SELECT SUM(salary) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>MIN</td>
+    <td class="description">SELECT MIN(column_name) FROM table_name WHERE condition;</td>
+    <td>MIN function returns the smallest value of the SELECTED column.</td>
+    <td class="code">
+      <pre><code>SELECT MIN(salary) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>MAX</td>
+    <td class="description">SELECT MAX(column_name) FROM table_name WHERE condition;</td>
+    <td>MAX function returns the largest value of the SELECTED column.</td>
+    <td class="code">
+      <pre><code>SELECT MAX(salary) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>ROUND</td>
+    <td class="description">SELECT ROUND(number, decimals) AS RoundValue;</td>
+    <td>ROUND function rounds a number to a specified number of decimal places.</td>
+    <td class="code">
+      <pre><code>SELECT ROUND(salary) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>LENGTH</td>
+    <td class="description">SELECT LENGTH(column_name) FROM table;</td>
+    <td>LENGTH function returns the length of a string (in bytes).</td>
+    <td class="code">
+      <pre><code>SELECT LENGTH(f_name) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>UCASE</td>
+    <td class="description">SELECT UCASE(column_name) FROM table;</td>
+    <td>UCASE function displays the column name in each table in uppercase.</td>
+    <td class="code">
+      <pre><code>SELECT UCASE(f_name) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>LCASE</td>
+    <td class="description">SELECT LCASE(column_name) FROM table;</td>
+    <td>LCASE function displays the column name in each table in lowercase.</td>
+    <td class="code">
+      <pre><code>SELECT LCASE(f_name) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DISTINCT</td>
+    <td class="description">SELECT DISTINCT column_name FROM table;</td>
+    <td>DISTINCT function is used to display data without duplicates.</td>
+    <td class="code">
+      <pre><code>SELECT DISTINCT UCASE(f_name) FROM employees;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DAY</td>
+    <td class="description">SELECT DAY(column_name) FROM table;</td>
+    <td>DAY function returns the day of the month for a given date.</td>
+    <td class="code">
+      <pre><code>SELECT DAY(b_date) FROM employees WHERE emp_id = 'E1002';</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>CURRENT_DATE</td>
+    <td class="description">SELECT CURRENT_DATE;</td>
+    <td>CURRENT_DATE is used to display the current date.</td>
+    <td class="code">
+      <pre><code>SELECT CURRENT_DATE;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DATEDIFF()</td>
+    <td class="description">SELECT DATEDIFF(date1, date2);</td>
+    <td>DATEDIFF() is used to calculate the difference between two dates or time stamps. The default value generated is the difference in number of days.</td>
+    <td class="code">
+      <pre><code>SELECT DATEDIFF(CURRENT_DATE, date_column) FROM table;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>FROM_DAYS()</td>
+    <td class="description">SELECT FROM_DAYS(number_of_days);</td>
+    <td>FROM_DAYS() is used to convert a given number of days to YYYY-MM-DD format.</td>
+    <td class="code">
+      <pre><code>SELECT FROM_DAYS(DATEDIFF(CURRENT_DATE, date_column)) FROM table;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DATE_ADD()</td>
+    <td class="description">SELECT DATE_ADD(date, INTERVAL n type);</td>
+    <td>DATE_ADD() is used to calculate the date after lapse of mentioned number of units of date type, i.e. if n=3 and type=DAY, the result is a date 3 days after what is mentioned in date column. The type variable can also be months or years.</td>
+    <td class="code">
+      <pre><code>SELECT DATE_ADD(date, INTERVAL 3 DAY);</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>DATE_SUB()</td>
+    <td class="description">SELECT DATE_SUB(date, INTERVAL n type);</td>
+    <td>DATE_SUB() is used to calculate the date prior to the record date by mentioned number of units of date type, i.e. if n=3 and type=DAY, the result is a date 3 days before what is mentioned in date column. The type variable can also be months or years.</td>
+    <td class="code">
+      <pre><code>SELECT DATE_SUB(date, INTERVAL 3 DAY);</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Subquery</td>
+    <td class="description">SELECT column_name [, column_name ] FROM table1 [, table2 ] WHERE column_name OPERATOR (SELECT column_name [, column_name ] FROM table1 [, table2 ] [WHERE])</td>
+    <td>Subquery is a query within another SQL query and embedded within the WHERE clause.
+        A subquery is used to return data that will be used in the main query as a condition to further restrict the data to be retrieved.</td>
+    <td class="code">
+      <pre><code>SELECT emp_id, f_name, l_name, salary
+FROM employees
+WHERE salary
+< (SELECT AVG(salary)
+FROM employees);
+
+SELECT * FROM ( SELECT emp_id, f_name, l_name, dep_id FROM employees) AS emp4all;
+
+SELECT * FROM employees WHERE job_id IN (SELECT job_ident FROM jobs);</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Implicit Inner Join</td>
+    <td class="description">SELECT column_name(s) FROM table1, table2 WHERE table1.column_name = table2.column_name;</td>
+    <td>Implicit Inner Join combines two or more records but displays only matching values in both tables. Inner join applies only the specified columns.</td>
+    <td class="code">
+      <pre><code>SELECT * FROM employees, jobs WHERE employees.job_id = jobs.job_ident;</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Implicit Cross Join</td>
+    <td class="description">SELECT column_name(s) FROM table1, table2;</td>
+    <td>Implicit Cross Join is defined as a Cartesian product where the number of rows in the first table is multiplied by the number of rows in the second table.</td>
+    <td class="code">
+      <pre><code>SELECT * FROM employees, jobs;</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+<body>
+
+<h2>SQL Cheat Sheet: Accessing Databases using Python</h2>
+
+<h2>SQLite</h2>
+<table>
+  <tr>
+    <th>Topic</th>
+    <th class="description">Syntax</th>
+    <th>Description</th>
+    <th class="code">Example</th>
+  </tr>
+  <tr>
+    <td>connect()</td>
+    <td class="description">sqlite3.connect()</td>
+    <td>Create a new database and open a database connection to allow sqlite3 to work with it. Call sqlite3.connect() to create a connection to the database INSTRUCTOR.db in the current working directory, implicitly creating it if it does not exist.</td>
+    <td class="code">
+      <pre><code>import sqlite3
+con = sqlite3.connect("INSTRUCTOR.db")</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>cursor()</td>
+    <td class="description">con.cursor()</td>
+    <td>To execute SQL statements and fetch results from SQL queries, use a database cursor. Call con.cursor() to create the Cursor.</td>
+    <td class="code">
+      <pre><code>cursor_obj = con.cursor()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>execute()</td>
+    <td class="description">cursor_obj.execute()</td>
+    <td>The execute method in Python's SQLite library allows to perform SQL commands, including retrieving data from a table using a query like "Select * from table_name." When you execute this command, the result is obtained as a collection of table data stored in an object, typically in the form of a list of lists.</td>
+    <td class="code">
+      <pre><code>cursor_obj.execute('''insert into INSTRUCTOR values (1, 'Rav', 'Ahuja', 'TORONTO', 'CA')''')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>fetchall()</td>
+    <td class="description">cursor_obj.fetchall()</td>
+    <td>The fetchall() method in Python retrieves all the rows from the result set of a query and presents them as a list of tuples.</td>
+    <td class="code">
+      <pre><code>statement = '''SELECT * FROM INSTRUCTOR'''
+cursor_obj.execute(statement)
+output_all = cursor_obj.fetchall()
+for row_all in output_all:
+    print(row_all)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>fetchmany()</td>
+    <td class="description">cursor_obj.fetchmany()</td>
+    <td>The fetchmany() method retrieves the subsequent group of rows from the result set of a query rather than just a single row. To fetch a few rows from the table, use fetchmany(numberofrows) and mention how many rows you want to fetch.</td>
+    <td class="code">
+      <pre><code>statement = '''SELECT * FROM INSTRUCTOR'''
+cursor_obj.execute(statement)
+output_many = cursor_obj.fetchmany(2)
+for row_many in output_many:
+    print(row_many)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>read_sql_query()</td>
+    <td class="description">read_sql_query()</td>
+    <td>read_sql_query() is a function provided by the Pandas library in Python, and it is not specific to MySQL. It is a generic function used for executing SQL queries on various database systems, including MySQL, and retrieving the results as a Pandas DataFrame.</td>
+    <td class="code">
+      <pre><code>df = pd.read_sql_query("select * from instructor;", con)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>shape</td>
+    <td class="description">dataframe.shape</td>
+    <td>It provides a tuple indicating the shape of a DataFrame or Series, represented as (number of rows, number of columns).</td>
+    <td class="code">
+      <pre><code>df.shape</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>close()</td>
+    <td class="description">con.close()</td>
+    <td>con.close() is a method used to close the connection to a MySQL database. When called, it terminates the connection, releasing any associated resources and ensuring the connection is no longer active. This is important for managing database connections efficiently and preventing resource leaks in your MySQL database interactions.</td>
+    <td class="code">
+      <pre><code>con.close()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>CREATE TABLE</td>
+    <td class="description">CREATE TABLE table_name ( column1 datatype constraints, column2 datatype constraints, ... );</td>
+    <td>The CREATE TABLE statement is used to define and create a new table within a database. It specifies the table's name, the structure of its columns (including data types and constraints), and any additional properties such as indexes. This statement essentially sets up the blueprint for organizing and storing data in a structured format within the database.</td>
+    <td class="code">
+      <pre><code>CREATE TABLE INTERNATIONAL_STUDENT_TEST_SCORES (
+country VARCHAR(50),
+first_name VARCHAR(50),
+last_name VARCHAR(50),
+test_score INT);</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>barplot()</td>
+    <td class="description">seaborn.barplot(x="x-axis_variable", y="y-axis_variable", data=data)</td>
+    <td>seaborn.barplot() is a function in the Seaborn Python data visualization library used to create a bar plot, also known as a bar chart. It is particularly used to display the relationship between a categorical variable and a numeric variable by showing the average value for each category.</td>
+    <td class="code">
+      <pre><code>import seaborn
+seaborn.barplot(x='Test_Score',y='Frequency', data=dataframe)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>read_csv()</td>
+    <td class="description">df = pd.read_csv('file_path.csv')</td>
+    <td>read_csv() is a function in Python's Pandas library used for reading data from a Comma-Separated Values (CSV) file and loading it into a Pandas DataFrame. It's a common method for working with tabular data stored in CSV format.</td>
+    <td class="code">
+      <pre><code>import pandas
+df = pandas.read_csv('https://data.cityofchicago.org/resource/jcxq-k9xf.csv')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>to_sql()</td>
+    <td class="description">df.to_sql('table_name', index=False)</td>
+    <td>df.to_sql() is a method in Pandas, a Python data manipulation library used to write the contents of a DataFrame to a SQL database. It allows to take data from a DataFrame and store it structurally within a SQL database table.</td>
+    <td class="code">
+      <pre><code>import pandas
+df = pandas.read_csv('https://data.cityofchicago.org/resource/jcxq-k9xf.csv')
+df.to_sql("chicago_socioeconomic_data", con, if_exists='replace', index=False, method="multi")</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>read_sql()</td>
+    <td class="description">df = pd.read_sql(sql_query, con)</td>
+    <td>read_sql() is a function provided by the Pandas library in Python for executing SQL queries and retrieving the results into a DataFrame from an SQL database. It's a convenient way to integrate SQL database interactions into your data analysis workflows.</td>
+    <td class="code">
+      <pre><code>selectQuery = "select * from INSTRUCTOR"
+df = pandas.read_sql(selectQuery, con)</code></pre>
+    </td>
+  </tr>
+</table>
+
+<h2>Db2</h2>
+<table>
+  <tr>
+    <th>Topic</th>
+    <th class="description">Syntax</th>
+    <th>Description</th>
+    <th class="code">Example</th>
+  </tr>
+  <tr>
+    <td>connect()</td>
+    <td class="description">conn = ibm_db.connect('DATABASE=dbname; HOST=hostname;PORT=port;UID=username; PWD=password;', '', '')</td>
+    <td>ibm_db.connect() is a Python function provided by the ibm_db library, which is used for establishing a connection to an IBM Db2 or IBM Db2 Warehouse database. It's commonly used in applications that need to interact with IBM Db2 databases from Python.</td>
+    <td class="code">
+      <pre><code>import ibm_db
+conn = ibm_db.connect('DATABASE=mydb; HOST=example.com;PORT=50000;UID=myuser; PWD=mypassword;', '', '')</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>server_info()</td>
+    <td class="description">ibm_db.server_info()</td>
+    <td>ibm_db.server_info(conn) is a Python function provided by the ibm_db library, which is used to retrieve information about the IBM Db2 server to which you are connected.</td>
+    <td class="code">
+      <pre><code>server = ibm_db.server_info(conn)
+print ("DBMS_NAME: ", server.DBMS_NAME)
+print ("DBMS_VER:  ", server.DBMS_VER)
+print ("DB_NAME:   ", server.DB_NAME)</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>close()</td>
+    <td class="description">con.close()</td>
+    <td>con.close() is a method used to close the connection to a db2 database. When called, it terminates the connection, releasing any associated resources and ensuring the connection is no longer active. This is important for managing database connections efficiently and preventing resource leaks in your db2 database interactions.</td>
+    <td class="code">
+      <pre><code>con.close()</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>exec_immediate()</td>
+    <td class="description">sql_statement = "SQL statement goes here" stmt = ibm_db.exec_immediate(conn, sql_statement)</td>
+    <td>ibm_db.exec_immediate() is a Python function provided by the ibm_db library, which is used to execute an SQL statement immediately without the need to prepare or bind it. It's commonly used for executing SQL statements that don't require input parameters or don't need to be prepared in advance.</td>
+    <td class="code">
+      <pre><code># Lets first drop the table INSTRUCTOR in case it exists from a previous attempt.
+dropQuery = "drop table INSTRUCTOR"
+dropStmt = ibm_db.exec_immediate(conn, dropQuery)</code></pre>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+</html>
