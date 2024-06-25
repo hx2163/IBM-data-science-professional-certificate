@@ -17,7 +17,7 @@ This repository contains documentation and resources used to complete the certif
 - :white_check_mark: [05. Python Project for Data Science](5.Python%20Project%20for%20Data%20Science/)
 - :white_check_mark: [06. Databases and SQL for Data Science with Python](6.Databases%20and%20SQL%20for%20Data%20Science%20with%20Python/)
 - :white_check_mark: [07. Data Analysis with Python](7.Data%20Analysis%20with%20Python/)
-- :white_check_mark: [08. Data Visualization with Python](8.Data%20Visualization%20with%20Python/)
+- :white_check_mark: [08. Data Visualization with Python](8.Data_Visualization/)
 - :white_check_mark: [09. Machine Learning with Python](9.Machine%20Learning%20with%20Python/)
 - :white_check_mark: [10. Applied Data Science Capstone](10.Applied%20Data%20Science%20Capstone/)
 
